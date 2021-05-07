@@ -1,0 +1,3 @@
+".\Objects\Final submission.obj" 
+TO ".\Objects\Final submission" 
+PRINT(".\Listings\Final submission.m51") RAMSIZE(256) 

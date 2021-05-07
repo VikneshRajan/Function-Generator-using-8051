@@ -1,0 +1,111 @@
+A51 MACRO ASSEMBLER  FINAL_SUBMISSION                                                     06/04/2020 19:34:08 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN E:\Final submission.obj
+ASSEMBLER INVOKED BY: D:\Padippu\Semester 4\Micro\C51\BIN\A51.EXE Final submission.asm SET(SMALL) DEBUG PRINT(.\Listings
+                      \Final submission.lst) OBJECT(E:\Final submission.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000h
+0000 75900F            2             MOV P1,#0Fh
+0003 758000            3             MOV P0,#00h
+0006 7C0A              4     LO:     MOV R4,#0Ah
+0008 30900B            5             JNB P1.0,LOOPP
+000B 309125            6             JNB P1.1,SINEWAVE
+000E 309265            7             JNB P1.2,tri
+0011 309355            8             JNB P1.3,SAWTOOTH
+0014 80F0              9             SJMP LO
+0016 78FF             10     LOOPP:MOV R0,#0FFh
+0018 7910             11               MOV R1,#10h
+001A 8002             12               SJMP loop
+001C 8058             13     LOOP2:SJMP tri
+001E                  14     loop: 
+001E 7580FF           15                             MOV P0,#0FFh      
+0021 112A             16                              ACALL DELAY
+0023 758000           17                              MOV P0,#00h
+0026 112A             18                              ACALL DELAY
+0028 80F4             19                              SJMP loop
+002A 7AEE             20                     DELAY:MOV R2,#0EEh
+002C                  21                     loop3:
+002C D8FE             22                     loopp1: DJNZ R0,loopp1
+002E D9FE             23                     loopp2: DJNZ R1,loopp2
+0030 DAFA             24                     DJNZ R2,loop3
+0032 22               25                     RET
+0033 758000           26     SINEWAVE: MOV P0,#00h
+0036 900050           27     SINEWAVE1:              MOV DPTR, #SINE
+0039 7A0D             28                     MOV R2,#13
+003B E4               29     NEXT: CLR A
+003C 93               30     MOVC A, @A+DPTR
+003D 60F4             31     JZ SINEWAVE
+003F F580             32     MOV P0,A
+0041 A3               33     INC DPTR
+0042 DAF7             34     DJNZ R2, NEXT
+0044 80ED             35     SJMP SINEWAVE
+0046 22               36     RET
+0050                  37     ORG 050H
+0050 1BA0BFD9         38     SINE : DB 27, 160, 191, 217, 237, 250, 255, 250, 237, 217, 191, 160, 127, 94, 63, 37, 17, 4
+                             , 1, 4, 17, 37, 63, 94, 127
+0054 EDFAFFFA                
+0058 EDD9BFA0                
+005C 7F5E3F25                
+0060 11040104                
+0064 11253F5E                
+0068 7F                      
+                      39             
+0069 7400             40     SAWTOOTH: MOV A, #00H
+006B F580             41     BACK: MOV P0,A
+006D 04               42     INC A
+006E B4FFFA           43     CJNE A,#255, BACK
+0071 7400             44     MOV A,#00
+0073 80F4             45     SJMP SAWTOOTH
+0075 22               46     RET
+                      47     
+0076 758000           48     tri:            MOV P0,#00h
+0079 E580             49             MOV A,P0
+007B 7400             50             main: MOV A,#00h
+A51 MACRO ASSEMBLER  FINAL_SUBMISSION                                                     06/04/2020 19:34:08 PAGE     2
+
+007D F580             51             up: MOV P0,A
+007F 04               52                     INC A
+0080 B4FFFA           53                     CJNE A,#0FFh,up
+0083 F580             54             dn: MOV P0,A
+0085 14               55                     DEC A
+0086 B400FA           56                     CJNE A,#00h,dn
+0089 80F0             57                     JMP main
+                      58     END
+A51 MACRO ASSEMBLER  FINAL_SUBMISSION                                                     06/04/2020 19:34:08 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BACK . . . . . . .  C ADDR   006BH   A   
+DELAY. . . . . . .  C ADDR   002AH   A   
+DN . . . . . . . .  C ADDR   0083H   A   
+LO . . . . . . . .  C ADDR   0006H   A   
+LOOP . . . . . . .  C ADDR   001EH   A   
+LOOP2. . . . . . .  C ADDR   001CH   A   
+LOOP3. . . . . . .  C ADDR   002CH   A   
+LOOPP. . . . . . .  C ADDR   0016H   A   
+LOOPP1 . . . . . .  C ADDR   002CH   A   
+LOOPP2 . . . . . .  C ADDR   002EH   A   
+MAIN . . . . . . .  C ADDR   007BH   A   
+NEXT . . . . . . .  C ADDR   003BH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+SAWTOOTH . . . . .  C ADDR   0069H   A   
+SINE . . . . . . .  C ADDR   0050H   A   
+SINEWAVE . . . . .  C ADDR   0033H   A   
+SINEWAVE1. . . . .  C ADDR   0036H   A   
+TRI. . . . . . . .  C ADDR   0076H   A   
+UP . . . . . . . .  C ADDR   007DH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
